@@ -17,6 +17,7 @@ CREATE TABLE CUSTOMER(
   dob date,
   emailid varchar(30),
   address varchar(50),
+  phoneno Int(10),
   CONSTRAINT pk_CUSTOMER PRIMARY KEY (custid)
 );
 
@@ -53,7 +54,7 @@ CREATE TABLE CUSTOMER_RATING(
   title Varchar(50) NOT NULL,
   film_id Integer NOT NULL,
   rating Integer DEFAULT 3, -- Rating should be greater than 0. For this CHECK contraint has to be written. Unfortunately it is not supported in MySQL. So, this has to be handled in triggers.
-  CONSTRAINT pk_CUSTOMER_RATING PRIMARY KEY (title, film_id),
+  CONSTRAINT pk_CUSTOMER_RATING PRIMARY KEY (custid, film_id),
   CONSTRAINT gives FOREIGN KEY (custid) REFERENCES CUSTOMER (custid),
   CONSTRAINT isRated FOREIGN KEY (film_id) REFERENCES FILM (film_id)
 );
