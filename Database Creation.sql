@@ -82,6 +82,5 @@ CREATE TABLE BORROWING(
   end_date Date,
   total_price DECIMAL(4,2),
   VAT DECIMAL(4,2) DEFAULT 16,
-  CONSTRAINT pk_BORROWING PRIMARY KEY (exemplar_id),
   CONSTRAINT makes FOREIGN KEY (custid) REFERENCES CUSTOMER (custid)
 );
