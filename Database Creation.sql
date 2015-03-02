@@ -1,5 +1,7 @@
 show databases;
 
+-- drop database videorental;
+
 create database videorental;
 
 use videorental;
@@ -27,14 +29,10 @@ CREATE TABLE order_record(
   CONSTRAINT places FOREIGN KEY (custid) REFERENCES CUSTOMER (custid)
 );
 
-CREATE TABLE CUSTOMER_RATING(
-  custid Integer NOT NULL,
-  title Varchar(50) NOT NULL,
-  film_id Integer NOT NULL,
-  rating Integer DEFAULT 3, -- Rating should be greater than 0. For this CHECK contraint has to be written. Unfortunately it is not supported in MySQL. So, this has to be handled in triggers.
-  CONSTRAINT pk_CUSTOMER_RATING PRIMARY KEY (title, film_id),
-  CONSTRAINT gives FOREIGN KEY (custid) REFERENCES CUSTOMER (custid),
-  CONSTRAINT isRated FOREIGN KEY (film_id) REFERENCES FILM (film_id)
+CREATE TABLE GENRE(
+  genre_id Integer NOT NULL,
+  name Varchar(20),
+  CONSTRAINT pk_GENRE PRIMARY KEY (genre_id)
 );
 
 CREATE TABLE FILM(
@@ -50,10 +48,30 @@ CREATE TABLE FILM(
   CONSTRAINT belongsTo FOREIGN KEY (genre_id) REFERENCES GENRE (genre_id)
 );
 
-CREATE TABLE GENRE(
-  genre_id Integer NOT NULL,
-  name Varchar(20),
-  CONSTRAINT pk_GENRE PRIMARY KEY (genre_id)
+CREATE TABLE CUSTOMER_RATING(
+  custid Integer NOT NULL,
+  title Varchar(50) NOT NULL,
+  film_id Integer NOT NULL,
+  rating Integer DEFAULT 3, -- Rating should be greater than 0. For this CHECK contraint has to be written. Unfortunately it is not supported in MySQL. So, this has to be handled in triggers.
+  CONSTRAINT pk_CUSTOMER_RATING PRIMARY KEY (title, film_id),
+  CONSTRAINT gives FOREIGN KEY (custid) REFERENCES CUSTOMER (custid),
+  CONSTRAINT isRated FOREIGN KEY (film_id) REFERENCES FILM (film_id)
+);
+
+CREATE TABLE MEDIUM(
+  medium_id Integer NOT NULL,
+  medium_type Varchar(20),
+  CONSTRAINT pk_MEDIUM PRIMARY KEY (medium_id)
+);
+
+CREATE TABLE EXEMPLAR(
+  exemplar_id Integer NOT NULL,
+  film_id Integer NOT NULL,
+  medium_id Integer NOT NULL,
+  price_per_day Integer,
+  CONSTRAINT pk_EXEMPLAR PRIMARY KEY (exemplar_id),
+  CONSTRAINT ak_exemplar_ppd UNIQUE (exemplar_id, price_per_day),
+  CONSTRAINT isAvailableOn FOREIGN KEY (medium_id) REFERENCES MEDIUM (medium_id)
 );
 
 CREATE TABLE BORROWING(
@@ -66,21 +84,3 @@ CREATE TABLE BORROWING(
   CONSTRAINT pk_BORROWING PRIMARY KEY (exemplar_id),
   CONSTRAINT makes FOREIGN KEY (custid) REFERENCES CUSTOMER (custid)
 );
-
-
-CREATE TABLE EXEMPLAR(
-  exemplar_id Integer NOT NULL,
-  film_id Integer NOT NULL,
-  medium_id Integer NOT NULL,
-  price_per_day Integer,
-  CONSTRAINT pk_EXEMPLAR PRIMARY KEY (exemplar_id),
-  CONSTRAINT ak_exemplar_ppd UNIQUE (exemplar_id, price_per_day),
-  CONSTRAINT isAvailableOn FOREIGN KEY (medium_id) REFERENCES MEDIUM (medium_id)
-);
-
-
-CREATE TABLE MEDIUM(
-  medium_id Integer NOT NULL,
-  medium_type Varchar(20),
-  CONSTRAINT pk_MEDIUM PRIMARY KEY (medium_id)
-)
