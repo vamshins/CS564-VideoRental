@@ -21,15 +21,6 @@ CREATE TABLE CUSTOMER(
   CONSTRAINT pk_CUSTOMER PRIMARY KEY (custid)
 );
 
-CREATE TABLE order_record(
-  orderid Integer NOT NULL,
-  custid integer,
-  film_id integer,
-  orderdate datetime,
-  CONSTRAINT pk_ORDER_RECORD PRIMARY KEY (orderid),
-  CONSTRAINT places FOREIGN KEY (custid) REFERENCES CUSTOMER (custid)
-);
-
 CREATE TABLE GENRE(
   genre_id Integer NOT NULL,
   name Varchar(20),
