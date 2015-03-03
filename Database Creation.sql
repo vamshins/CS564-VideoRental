@@ -36,7 +36,7 @@ CREATE TABLE FILM(
   minimal_age Integer,
   film_episode_id Integer,
   CONSTRAINT pk_FILM PRIMARY KEY (film_id),
-  CONSTRAINT ak_title_director UNIQUE (title,director),
+  CONSTRAINT uk_title_director UNIQUE (title,director),
   CONSTRAINT belongsTo FOREIGN KEY (genre_id) REFERENCES GENRE (genre_id)
 );
 
