@@ -18,6 +18,7 @@ CREATE TABLE CUSTOMER(
   emailid varchar(30),
   address varchar(50),
   phoneno Int(10),
+  password VARCHAR(32),
   CONSTRAINT pk_CUSTOMER PRIMARY KEY (custid)
 );
 
