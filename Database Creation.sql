@@ -67,20 +67,34 @@ CREATE TABLE MEDIUM(
 
 CREATE TABLE EXEMPLAR(
   exemplar_id Integer NOT NULL,
-  film_id Integer NOT NULL,
-  medium_id Integer NOT NULL,
-  price_per_day Integer,
-  CONSTRAINT pk_EXEMPLAR PRIMARY KEY (exemplar_id),
-  CONSTRAINT ak_exemplar_ppd UNIQUE (exemplar_id, price_per_day),
-  CONSTRAINT isAvailableOn FOREIGN KEY (medium_id) REFERENCES MEDIUM (medium_id)
+  exemplar_name varchar(30),
+  address varchar(50),
+  phone_no int(10),
+  CONSTRAINT pk_EXEMPLAR PRIMARY KEY (exemplar_id)
+);
+
+create table MOVIESOFFERED(
+	offered_id Integer NOT NULL,
+	exemplar_id Integer NOT NULL,
+    film_id Integer NOT NULL,
+    medium_id Integer NOT NULL,
+    price_per_day DECIMAL(4,2),
+    availability_status varchar(1),
+    CONSTRAINT pk_moviesoffered PRIMARY KEY (offered_id),
+    CONSTRAINT isOfferedBy FOREIGN KEY (exemplar_id) REFERENCES EXEMPLAR (exemplar_id),
+    CONSTRAINT isOfferedOn FOREIGN KEY (film_id) REFERENCES FILM (film_id),
+    CONSTRAINT isAvailableOn FOREIGN KEY (medium_id) REFERENCES MEDIUM (medium_id)
 );
 
 CREATE TABLE BORROWING(
-  exemplar_id Integer NOT NULL,
+  borrowing_id Integer NOT NULL,
+  offered_id Integer NOT NULL,
   custid Integer NOT NULL,
   start_date TIMESTAMP DEFAULT NOW(), -- end_date > start_date. For this CHECK contraint has to be written. Unfortunately it is not supported in MySQL. So, this has to be handled in triggers.
   end_date Date,
   total_price DECIMAL(4,2),
   VAT DECIMAL(4,2) DEFAULT 16,
-  CONSTRAINT makes FOREIGN KEY (custid) REFERENCES CUSTOMER (custid)
+  CONSTRAINT pk_BORROWING PRIMARY KEY (borrowing_id),
+  CONSTRAINT makes FOREIGN KEY (offered_id) REFERENCES MOVIESOFFERED (offered_id),
+  CONSTRAINT isBorrowedBy FOREIGN KEY (custid) REFERENCES CUSTOMER (custid)
 );
