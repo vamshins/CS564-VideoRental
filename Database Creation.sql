@@ -65,16 +65,16 @@ CREATE TABLE EXEMPLAR(
 );
 
 create table MOVIESOFFERED(
-	offered_id Integer NOT NULL,
-	exemplar_id Integer NOT NULL,
-    film_id Integer NOT NULL,
-    medium_id Integer NOT NULL,
-    price_per_day DECIMAL(4,2),
-    availability_status varchar(1),
-    CONSTRAINT pk_moviesoffered PRIMARY KEY (offered_id),
-    CONSTRAINT isOfferedBy FOREIGN KEY (exemplar_id) REFERENCES EXEMPLAR (exemplar_id),
-    CONSTRAINT isOfferedOn FOREIGN KEY (film_id) REFERENCES FILM (film_id),
-    CONSTRAINT isAvailableOn FOREIGN KEY (medium_id) REFERENCES MEDIUM (medium_id)
+  offered_id Integer NOT NULL,
+  exemplar_id Integer NOT NULL,
+  film_id Integer NOT NULL,
+  medium_id Integer NOT NULL,
+  price_per_day DECIMAL(4,2),
+  availability_status varchar(1),
+  CONSTRAINT pk_moviesoffered PRIMARY KEY (offered_id),
+  CONSTRAINT isOfferedBy FOREIGN KEY (exemplar_id) REFERENCES EXEMPLAR (exemplar_id),
+  CONSTRAINT isOfferedOn FOREIGN KEY (film_id) REFERENCES FILM (film_id),
+  CONSTRAINT isAvailableOn FOREIGN KEY (medium_id) REFERENCES MEDIUM (medium_id)
 );
 
 CREATE TABLE BORROWING(
