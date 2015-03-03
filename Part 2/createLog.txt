@@ -1,18 +1,5 @@
-mysql> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| test               |
-| vamshins           |
-+--------------------+
-3 rows in set (0.00 sec)
-
 mysql> use vamshins;
 Database changed
-mysql> show tables;
-Empty set (0.00 sec)
-
 mysql> CREATE TABLE CUSTOMER(
     ->   custid Integer NOT NULL,
     ->   firstname Varchar(20),
@@ -22,7 +9,7 @@ mysql> CREATE TABLE CUSTOMER(
     ->   dob date,
     ->   emailid varchar(30),
     ->   address varchar(50),
-    ->   phoneno Int(10),
+    ->   phoneno varchar(10),
     ->   password VARCHAR(32),
     ->   CONSTRAINT pk_CUSTOMER PRIMARY KEY (custid)
     -> );
@@ -47,34 +34,33 @@ mysql> CREATE TABLE FILM(
     ->   CONSTRAINT uk_title_director UNIQUE (title,director),
     ->   CONSTRAINT belongsTo FOREIGN KEY (genre_id) REFERENCES GENRE (genre_id)
     -> );
-Query OK, 0 rows affected (0.13 sec)
+Query OK, 0 rows affected (0.09 sec)
 
 mysql> CREATE TABLE CUSTOMER_RATING(
     ->   custid Integer NOT NULL,
-    ->   title Varchar(50) NOT NULL,
     ->   film_id Integer NOT NULL,
     ->   rating Integer DEFAULT 3, -- Rating should be greater than 0. For this CHECK contraint has to be written. Unfortunately it is not supported in MySQL. So, this has to be handled in triggers.
     ->   CONSTRAINT pk_CUSTOMER_RATING PRIMARY KEY (custid, film_id),
     ->   CONSTRAINT gives FOREIGN KEY (custid) REFERENCES CUSTOMER (custid),
     ->   CONSTRAINT isRated FOREIGN KEY (film_id) REFERENCES FILM (film_id)
     -> );
-Query OK, 0 rows affected (0.14 sec)
+Query OK, 0 rows affected (0.08 sec)
 
 mysql> CREATE TABLE MEDIUM(
     ->   medium_id Integer NOT NULL,
     ->   medium_type Varchar(20),
     ->   CONSTRAINT pk_MEDIUM PRIMARY KEY (medium_id)
     -> );
-Query OK, 0 rows affected (0.10 sec)
+Query OK, 0 rows affected (0.09 sec)
 
 mysql> CREATE TABLE EXEMPLAR(
     ->   exemplar_id Integer NOT NULL,
     ->   exemplar_name varchar(30),
     ->   address varchar(50),
-    ->   phone_no int(10),
+    ->   phone_no varchar(10),
     ->   CONSTRAINT pk_EXEMPLAR PRIMARY KEY (exemplar_id)
     -> );
-Query OK, 0 rows affected (0.08 sec)
+Query OK, 0 rows affected (0.09 sec)
 
 mysql> create table MOVIESOFFERED(
     ->   offered_id Integer NOT NULL,
@@ -88,7 +74,7 @@ mysql> create table MOVIESOFFERED(
     ->   CONSTRAINT isOfferedOn FOREIGN KEY (film_id) REFERENCES FILM (film_id),
     ->   CONSTRAINT isAvailableOn FOREIGN KEY (medium_id) REFERENCES MEDIUM (medium_id)
     -> );
-Query OK, 0 rows affected (0.10 sec)
+Query OK, 0 rows affected (0.09 sec)
 
 mysql> CREATE TABLE BORROWING(
     ->   borrowing_id Integer NOT NULL,
@@ -102,21 +88,4 @@ mysql> CREATE TABLE BORROWING(
     ->   CONSTRAINT borrowedFrom FOREIGN KEY (offered_id) REFERENCES MOVIESOFFERED (offered_id),
     ->   CONSTRAINT isBorrowedBy FOREIGN KEY (custid) REFERENCES CUSTOMER (custid)
     -> );
-Query OK, 0 rows affected (0.10 sec)
-
-mysql> show tables;
-+--------------------+
-| Tables_in_vamshins |
-+--------------------+
-| BORROWING          |
-| CUSTOMER           |
-| CUSTOMER_RATING    |
-| EXEMPLAR           |
-| FILM               |
-| GENRE              |
-| MEDIUM             |
-| MOVIESOFFERED      |
-+--------------------+
-8 rows in set (0.00 sec)
-
-mysql> exit
+Query OK, 0 rows affected (0.12 sec)

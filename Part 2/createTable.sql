@@ -1,12 +1,8 @@
-show databases;
+drop database IF EXISTS videorental;
 
--- drop database videorental;
-
-create database videorental;
+create database IF NOT EXISTS videorental;
 
 use videorental;
-
-show tables;
 
 CREATE TABLE CUSTOMER(
   custid Integer NOT NULL,
