@@ -24,26 +24,26 @@ CREATE TABLE GENRE(
   CONSTRAINT pk_GENRE PRIMARY KEY (genre_id)
 );
 
-CREATE TABLE FILM(
-  film_id Integer NOT NULL,
+CREATE TABLE MOVIE(
+  movie_id Integer NOT NULL,
   title Varchar(50) NOT NULL,
   director Varchar(30) NOT NULL,
   production_company Varchar(50),
   genre_id Integer NOT NULL,
   minimal_age Integer,
   film_episode_id Integer,
-  CONSTRAINT pk_FILM PRIMARY KEY (film_id),
+  CONSTRAINT pk_FILM PRIMARY KEY (movie_id),
   CONSTRAINT uk_title_director UNIQUE (title,director),
   CONSTRAINT belongsTo FOREIGN KEY (genre_id) REFERENCES GENRE (genre_id)
 );
 
 CREATE TABLE CUSTOMER_RATING(
   custid Integer NOT NULL,
-  film_id Integer NOT NULL,
+  movie_id Integer NOT NULL,
   rating Integer DEFAULT 3, -- Rating should be greater than 0. For this CHECK contraint has to be written. Unfortunately it is not supported in MySQL. So, this has to be handled in triggers.
-  CONSTRAINT pk_CUSTOMER_RATING PRIMARY KEY (custid, film_id),
+  CONSTRAINT pk_CUSTOMER_RATING PRIMARY KEY (custid, movie_id),
   CONSTRAINT gives FOREIGN KEY (custid) REFERENCES CUSTOMER (custid),
-  CONSTRAINT isRated FOREIGN KEY (film_id) REFERENCES FILM (film_id)
+  CONSTRAINT isRated FOREIGN KEY (movie_id) REFERENCES FILM (movie_id)
 );
 
 CREATE TABLE MEDIUM(
@@ -63,13 +63,13 @@ CREATE TABLE EXEMPLAR(
 create table MOVIESOFFERED(
   offered_id Integer NOT NULL,
   exemplar_id Integer NOT NULL,
-  film_id Integer NOT NULL,
+  movie_id Integer NOT NULL,
   medium_id Integer NOT NULL,
   price_per_day DECIMAL(4,2),
   availability_status varchar(1),
   CONSTRAINT pk_moviesoffered PRIMARY KEY (offered_id),
   CONSTRAINT isOfferedBy FOREIGN KEY (exemplar_id) REFERENCES EXEMPLAR (exemplar_id),
-  CONSTRAINT isOfferedOn FOREIGN KEY (film_id) REFERENCES FILM (film_id),
+  CONSTRAINT isOfferedOn FOREIGN KEY (movie_id) REFERENCES FILM (movie_id),
   CONSTRAINT isAvailableOn FOREIGN KEY (medium_id) REFERENCES MEDIUM (medium_id)
 );
 
