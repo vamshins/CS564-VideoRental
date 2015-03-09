@@ -1,4 +1,4 @@
-use videorental;
+use vamshins;
 
 Insert into customer values('C10001','Georgi','Facello','active','M','1953-09-02','gfacello@gmail.com','676 Little Cider Promenade, Spotted Horn, OH, 43979-0144, US','3956961242',MD5('Georgi'));
 Insert into customer values('C10002','Bezalel','Simmel','active','F','1964-06-02','bsimmel@gmail.com','408 Stony Stead, Ben Hur, IN, 47675-1910, US','3817154227',MD5('Bezalel'));
