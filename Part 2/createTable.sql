@@ -1,4 +1,4 @@
-use vamshins;
+-- use vamshins;
 
 CREATE TABLE CUSTOMER(
   custid varchar(20) not null,
