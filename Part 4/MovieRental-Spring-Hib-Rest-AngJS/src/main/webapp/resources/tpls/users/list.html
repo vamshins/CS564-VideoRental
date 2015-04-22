@@ -1,0 +1,27 @@
+<div ng-app="userApp">
+	<div class="content">
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<td><label>#</label></td>
+					<td><a href="javascript:void(0);" ng-click="sort('spridenPidm')">Pidm </a></td>
+					<td><a href="javascript:void(0);" ng-click="sort('spridenFirstName')">First Name </a></td>
+					<td><a href="javascript:void(0);" ng-click="sort('spridenLastName')">Last Name </a></td>
+					<td><a href="javascript:void(0);" ng-click="sort('spridenUserId')">User Id </a></td>
+					<td><a href="javascript:void(0);">Action </a></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="user in users | orderBy:sortField:reverse">
+					<td>{{user.spridenId}}</td>
+					<td>{{user.spridenPidm}}</td>
+					<td>{{user.spridenFirstName}}</td>
+					<td>{{user.spridenLastName}}</td>
+					<td>{{user.spridenUserId}}</td>
+					<td><a ng-click="edit(user)" href="javascript:void(0);">Edit</a> | <a
+						ng-click="del(user)" href="javascript:void(0);">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</html>

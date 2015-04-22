@@ -1,0 +1,30 @@
+<div class="container" ng-controller="NewController">
+	<form name="userForm" class="form-signin" role="form">
+		<div ng-show='message'></div>
+		<div ng-switch on="showResponse">
+			<div ng-switch-when="success">
+				<div class="alert alert-success">{{response}}</div>
+			</div>
+			<div ng-switch-when="failed">
+				<div class="alert alert-danger">{{response}}</div>
+			</div>
+			<div ng-switch-when="exists">
+				<div class="alert alert-danger">{{response}}</div>
+			</div>
+		</div>
+			<label>Name</label>
+			<input type="text" ng-model="newuser.name" required focus
+				class="form-control">
+			<label>Email</label>
+			<input type="email" ng-model="newuser.email" required
+				class="form-control" ng-blur="checkEmail(newuser.email)">
+			<label>Phone</label>
+			<input type="text" ng-model="newuser.phone" ng-length='10' required
+				class="form-control">					
+			<label>Description</label>
+			<input type="text" ng-model="newuser.desc" ng-length='10' required
+				class="form-control">
+			<button type="submit" ng-click="add(newuser)"
+				ng-disabled="!userForm.$valid" class="btn btn-primary btn-block">Add</button>
+	</form>
+</div>

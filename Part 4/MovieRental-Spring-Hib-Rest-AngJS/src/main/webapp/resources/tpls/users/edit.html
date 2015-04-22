@@ -1,0 +1,28 @@
+<div ng-app="userApp">
+	<form name="userForm" class="well">
+		<div ng-show='message'></div>
+		<div ng-switch on="showResponse">
+			<div ng-switch-when="success">
+				<div class="alert alert-success">{{response}}</div>
+			</div>
+			<div ng-switch-when="failed">
+				<div class="alert alert-danger">{{response}}</div>
+			</div>
+		</div>
+		<div class="modal-body">
+			<input type="hidden" ng-model="edituser.id" value="{{edituser.id}}" />
+			<label>Name</label> <input type="text" ng-model="edituser.name"
+				required focus class="form-control"> <br> <label>Email</label>
+			<input type="email" ng-model="edituser.email" required
+				class="form-control"> <br> <label>Phone</label> <input
+				type="number" ng-model="edituser.phone" ng-length='10' required
+				class="form-control"><br> <label>Description</label> <input
+				type="text" ng-model="edituser.desc" ng-length='10' required
+				class="form-control">
+		</div>
+		<div class="modal-footer">
+			<button type="submit" ng-click="update(edituser)"
+				class="btn btn-primary btn-block" ng-disabled="!userForm.$valid">Update</button>
+		</div>
+	</form>
+</div>

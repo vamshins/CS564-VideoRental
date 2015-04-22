@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 20, 2015 4:55:56 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="edu.unm.registration.model.VknsSpriden" table="VKNS_SPRIDEN">
+        <id name="spridenId" type="string">
+            <column name="SPRIDEN_ID" length="36" />
+            <generator class="assigned" />
+        </id>
+        <property name="spridenPidm" type="int">
+            <column name="SPRIDEN_PIDM" precision="8" scale="0" not-null="true" />
+        </property>
+        <property name="spridenLastName" type="string">
+            <column name="SPRIDEN_LAST_NAME" length="240" not-null="true" />
+        </property>
+        <property name="spridenFirstName" type="string">
+            <column name="SPRIDEN_FIRST_NAME" length="240" />
+        </property>
+        <property name="spridenMi" type="string">
+            <column name="SPRIDEN_MI" length="240" />
+        </property>
+        <property name="spridenChangeInd" type="string">
+            <column name="SPRIDEN_CHANGE_IND" length="4" />
+        </property>
+        <property name="spridenEntityInd" type="string">
+            <column name="SPRIDEN_ENTITY_IND" length="4" />
+        </property>
+        <property name="spridenActivityDate" type="date">
+            <column name="SPRIDEN_ACTIVITY_DATE" length="7" not-null="true" />
+        </property>
+        <property name="spridenUser" type="string">
+            <column name="SPRIDEN_USER" length="120" />
+        </property>
+        <property name="spridenOrigin" type="string">
+            <column name="SPRIDEN_ORIGIN" length="120" />
+        </property>
+        <property name="spridenSearchLastName" type="string">
+            <column name="SPRIDEN_SEARCH_LAST_NAME" length="240" />
+        </property>
+        <property name="spridenSearchFirstName" type="string">
+            <column name="SPRIDEN_SEARCH_FIRST_NAME" length="240" />
+        </property>
+        <property name="spridenSearchMi" type="string">
+            <column name="SPRIDEN_SEARCH_MI" length="240" />
+        </property>
+        <property name="spridenSoundexLastName" type="string">
+            <column name="SPRIDEN_SOUNDEX_LAST_NAME" length="16" />
+        </property>
+        <property name="spridenSoundexFirstName" type="string">
+            <column name="SPRIDEN_SOUNDEX_FIRST_NAME" length="16" />
+        </property>
+        <property name="spridenNtypCode" type="string">
+            <column name="SPRIDEN_NTYP_CODE" length="16" />
+        </property>
+        <property name="spridenCreateUser" type="string">
+            <column name="SPRIDEN_CREATE_USER" length="120" />
+        </property>
+        <property name="spridenCreateDate" type="date">
+            <column name="SPRIDEN_CREATE_DATE" length="7" />
+        </property>
+        <property name="spridenDataOrigin" type="string">
+            <column name="SPRIDEN_DATA_ORIGIN" length="120" />
+        </property>
+        <property name="spridenCreateFdmnCode" type="string">
+            <column name="SPRIDEN_CREATE_FDMN_CODE" length="120" />
+        </property>
+        <property name="spridenNameErrorCode" type="string">
+            <column name="SPRIDEN_NAME_ERROR_CODE" length="120" />
+        </property>
+        <property name="spridenSurnamePrefix" type="string">
+            <column name="SPRIDEN_SURNAME_PREFIX" length="240" />
+        </property>
+        <property name="spridenSurrogateId" type="big_decimal">
+            <column name="SPRIDEN_SURROGATE_ID" scale="0" />
+        </property>
+        <property name="spridenVersion" type="big_decimal">
+            <column name="SPRIDEN_VERSION" scale="0" />
+        </property>
+        <property name="spridenUserId" type="string">
+            <column name="SPRIDEN_USER_ID" length="120" />
+        </property>
+        <property name="spridenVpdiCode" type="string">
+            <column name="SPRIDEN_VPDI_CODE" length="24" />
+        </property>
+    </class>
+</hibernate-mapping>
