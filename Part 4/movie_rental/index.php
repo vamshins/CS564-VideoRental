@@ -23,7 +23,7 @@
             
             if(isset($_POST['email_id']))
         {
-            $sql="Select firstname,lastname,custid from customer where emailid='$email' and password=MD5('$passwrd')";
+            $sql="Select firstname,lastname,custid,gender from customer where emailid='$email' and password=MD5('$passwrd')";
             $result = mysql_query($sql);
             if (mysql_numrows($result) > 0)
             {
@@ -31,6 +31,7 @@
                 $_SESSION["firstname"] = $row['firstname'];
                 $_SESSION["lastname"] = $row['lastname'];
                 $_SESSION["custid"] = $row['custid'];
+                $_SESSION["gend"] = $row['gender'];
                 header("Location: home.php");
              // output data of each row
                 //while($row = mysql_fetch_assoc($result)) {
