@@ -2,7 +2,7 @@
     <style type="text/css">
     .mytable
         {
-    position:fixed;
+    position: absolute;
     margin-left:-150px; /* half of width */
     margin-top:-150px;  /* half of height */
     top:50%;
@@ -56,8 +56,10 @@ if(mysql_numrows($result) == 0)
  }
  ?>
 <br><br><br><br>
-<center><u><h3 style="font-size:x-large">Register here for Movie Rental Database System</h3></u></center>
+<center><u><h3 style="font-size:x-large">Register here for Movie Rental Database System</h3></u>
+</center>
 <div class="myTable">
+    <h3 style="font-size:medium">If you are already registered please login <a href="index.php">here</a></a></h3>
    <form action="register.php" method="post">
         <table>
             <tr>
@@ -69,8 +71,8 @@ if(mysql_numrows($result) == 0)
                 <td><input type="text" name="lname" required placeholder="Last Name" value='<?php echo $last; ?>'></td>
             </tr>
             <tr>
-                <th>Emai Id :</th>
-                <td><input type="email" name="emailid" required placeholder="Emai Id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"></td>
+                <th>Email Id :</th>
+                <td><input type="email" name="emailid" required placeholder="Email Id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"></td>
             </tr>
             <tr>
                 <th>Password :</th>
