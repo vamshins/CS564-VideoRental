@@ -6,6 +6,7 @@
 Our web application is built using PHP, HTML as front end, MySQL as backend. We have used local installation of MySQL as database instead of UNM database.
 
 There are two type of roles in the Movie Rental System. They are: 
+
 	1) Administrator 
 		He can add/update a movie in the database. The details of the movie include Genre, Medium, etc.
 		He can add new exemplar details and link that exemplar to the movie created.
