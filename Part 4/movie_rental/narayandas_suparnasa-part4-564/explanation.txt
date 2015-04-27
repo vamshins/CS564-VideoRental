@@ -1,0 +1,73 @@
+Movie Rental Database System :
+=============================
+
+Our web application is built using PHP, HTML as front end, MySQL as backend. We have used local installation of MySQL as database instead of UNM database.
+
+There are two type of roles in the Movie Rental System. They are: 
+	1) Administrator 
+		He can add/update a movie in the database. The details of the movie include Genre, Medium, etc.
+		He can add new exemplar details and link that exemplar to the movie created.
+		He can also update his profile information if needed.
+	
+	2) Customer
+		He can search for a movie and place order for a movie if the movie is currently available to buy.
+		He can update his profile information if needed.
+		He can view all his past orders placed till date.
+
+Source Code :
+============
+
+<index.php>
+	- This page offers Login functionality into the website.
+	- HTML5 validations are done to identify proper email and password patterns.
+	- The PHP script checks for the right email-id,password combination and redirects Customer/Admin to their respective home page after setting session variables. If the status in the Customer table is "inactive", we considered him as Administrator and he will be redirected to Admin Home page after login. Else, we considered him as Customer and he will be redirected to Customer Home page after login.
+
+<register.php>
+	- This page helps users to register with all the necessary details.
+    - HTML5 validations are done to identify proper email pattern,date of birth and mobile number pattern
+    - Date of birth can't be more than current date. We handeled that using HTML5.
+    - This page stores all the details entered by Customer in the database if the email id is not registered before.
+
+<home.php>
+	- This is the home page that appears after a customer is logged in successfully.
+    - This page display's details of previous orders of a customer "ordered by" purchased date.
+    - If there are no previous orders, the page shows a message "No previous orders available".
+    - The customer can navigate to other pages to update his profile, browse the movies, place an order.
+
+<admin_home.php>
+	- This is the home page that appears after an Admin is logged in successfully.
+	- The customer can navigate to other pages to update his profile, add the movies, exemplar, genre, etc.
+
+<update.php>
+	- This page allows customers to update their information.
+    - The form can display current information from database.
+    - Customers can update all the details except for Email-id and Password.
+
+<update_admin.php>
+	- This page allows Admins to update their information.
+    - The form can display current information from database.
+    - Admins can update all the details except for Email-id and Password.
+
+<browse.php>
+	- This page allows customer to search for movies. The page results list of movie titles for the entered search text.
+
+<about.php>
+	- This page returns all the details about the movie such as director, producer, genre, exemplar and medium when a customer clicks on a particular movie from browse.php. Buy option will be enabled if a movie is currently offered by an exemplar. Customer will be redirected to buy.php if he clicks on BUY button.
+
+<buy.php>
+	- This page allows customer to give from-date (Current date) and to-date till when the Customer wishes to rent the selected movie.
+	- Once the dates are selected, the system will calculate the total order amount for the number of days the Customer wishes to rent.
+	- Customer can confirm the order once the Total Bill Amount is displayed.
+	- A new entry will be inserted into borrowing table to store the order information.
+
+<add_movie.php>
+	- This administration page is used to add new movies into the system
+
+<logout.php>
+	- This page allows Customers/Admins to logout from the system by destroying all the session variables that are created during a session.
+
+<error.html>
+	- This page is displayed if the application runs into any errors.
+
+<styles.css>
+	- CSS to apply styles to html content in the web pages.

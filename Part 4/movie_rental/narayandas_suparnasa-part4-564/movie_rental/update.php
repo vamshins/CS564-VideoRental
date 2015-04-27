@@ -1,7 +1,13 @@
+<!-- This page allows customers to update their information.
+     The form can display current information from database.
+     Customers can update all the details except for Email-id and Password.
+-->
+
 <html>
 <link rel="stylesheet" type="text/css" href="styles.css">
 <body>    
 <?php
+
 session_start();
  $status = '';
  $first =''; 
@@ -13,14 +19,20 @@ session_start();
  $max_date = date("mm/dd/yyy");
  $adrs = '';
  $phone = '';
+
+ // If the session is not SET, the page redirects to error page as it is an invalid request
+
 if(isset($_SESSION["firstname"]))
 {
  $first = $_SESSION["firstname"];
  $last = $_SESSION["lastname"];
  $custid = $_SESSION["custid"];
  $gend = $_SESSION["gend"];
- $con=mysqli_connect("localhost","root","narayandas") or die("Not Connected");
+ $con=mysqli_connect("localhost","root","") or die("Not Connected");
  mysqli_query($con,"use movierental");
+ 
+ // Allow users to update their details.First section contains SELECT query,which displays current customer information
+ 
  $sql =   "Select firstname,lastname,gender,dob,emailid,address,phoneno,MD5(password) as password from customer where custid='$custid'";
  $result = mysqli_query($con,$sql);
  $row = mysqli_fetch_assoc($result);
@@ -40,6 +52,7 @@ if(isset($_SESSION["firstname"]))
     $dob = $_POST["dob"];
     $adrs = $_POST["address"];
     $phone = $_POST["mobile"];
+    // Second section is an UPDATE query, if a Customer changes his details.
     $sql =   "Update CUSTOMER SET firstname = '$first',lastname = '$last',gender = '$gend',
               dob = '$dob', address = '$adrs', phoneno = '$phone' where custid='$custid'";
     if(mysqli_query($con,$sql))
@@ -59,6 +72,8 @@ else
 {
    header("Location: error.html");
 }
+// Salutation section , Mr or Ms is decided based on the gender.
+
 if ($gend == "M")
  {
     $salut = "Mr";
@@ -77,7 +92,7 @@ Hello <strong style="color: brown"> <?php echo "$salut. $first $last"?></strong>
   <li><a class="mylink" href="home.php">Home</a></li>
   <li><a class="mylink" href="#update">Update Profile</a></li>
   <li><a class="mylink" href="browse.php">Browse Movies</a></li>
-  <li><a class="mylink" href="buy.php">Buy Moives</a></li>
+  <li><a class="mylink" href="logout.php">Logout</a></li>
 </ul>
 </div>
 <div class="myTable">

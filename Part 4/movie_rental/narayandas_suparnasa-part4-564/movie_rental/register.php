@@ -1,3 +1,8 @@
+<!-- This page helps users to register with all the necessary details.
+    HTML5 validations are done to identify proper email pattern,date of birth and mobile number pattern
+    Date of birth can't be more than current date. We handeled that using HTML5.
+    The PHP script below store's all the details entered by Customer if the email id is not registered before.
+-->
 <html>
     <style type="text/css">
     .mytable
@@ -18,7 +23,6 @@
  $paswrd =''; 
  $gend = '';
  $dob = '';
- $max_date = date("mm/dd/yyy");
  $adrs = '';
  $phone = '';
  if ($_SERVER["REQUEST_METHOD"] == "POST")
@@ -32,16 +36,21 @@ session_start();
  $dob = $_POST["dob"];
  $adrs = $_POST["address"];
  $phone = $_POST["mobile"];
-//echo "Hello Mr.$first $last $email $paswrd $gend $dob $adrs $phone";
-$con=mysql_connect("localhost","root","narayandas") or die("Not Connected");
-mysql_query("use movierental");
+ 
+// Checks if the email-id entered is already registered
+$con=mysqli_connect("localhost","root","") or die("Not Connected");
+mysqli_query($con,"use movierental");
 $sql=   "Select emailid from customer where emailid='$email'";
-$result = mysql_query($sql);
-if(mysql_numrows($result) == 0)
+$result = mysqli_query($con,$sql);
+// A new user will be registered if the email-id is not registered before
+// Encrypted Password is saved inthe database 
+if(mysqli_num_rows($result) == 0)
 {
+    // A new customer id is generated and a new customer is inserted upon new user registration.
+    
     $sql = "INSERT into customer SELECT concat('C',substring(max(custid),2,5)+1),'$first','$last',
     'active','$gend','$dob','$email','$adrs','$phone',MD5('$paswrd') from customer";
-    if(mysql_query($sql))
+    if(mysqli_query($con,$sql))
     {
         $status = "User Created Successfully ! To login <a href='index.php'>click here</a>";
     }
@@ -83,7 +92,7 @@ if(mysql_numrows($result) == 0)
             </tr>
             <tr>
                 <th>Date of Birth :</th>
-                <td><input type="date" name="dob" max='<?php echo $max_date; ?>' required value='<?php echo $dob; ?>'></td>
+                <td><input type="date" name="dob" max='<?php echo date("Y-m-d"); ?>' required value='<?php echo $dob; ?>'></td>
             </tr>
             <tr>
                 <th>Address :</th>

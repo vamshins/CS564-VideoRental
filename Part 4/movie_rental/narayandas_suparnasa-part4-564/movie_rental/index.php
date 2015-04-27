@@ -1,3 +1,11 @@
+<!-- This page offers Login functionality into the website.
+    HTML5 validations are done to identify proper email and password patterns.
+    The PHP script checks for the right email-id,password combination and redirects user to home page
+    after setting session variables.
+    If the status in the Customer table is "inactive",
+    we considered him as Administrator and he will be redirected to Admin Home page after login.
+    Else, we considered him as Customer and he will be redirected to Customer Home page after login.
+-->
 <html>
     <style type="text/css">
         .mytable
@@ -12,33 +20,52 @@
     <title>Welcome to Movie Rental Database</title>
     <body>
          <?php
+         // If the form is submitted the below loop will be called
          session_start();
          $status = '';
         if ($_SERVER["REQUEST_METHOD"] == "POST")
         {
             $email = $_POST['email_id'];
             $passwrd = $_POST['passwrd'];
-            $con=mysql_connect("localhost","root","narayandas") or die("Not Connected");
-            mysql_query("use movierental");
+            // mysql function to connect database
+            $con=mysqli_connect("localhost","root","") or die("Not Connected");
+            mysqli_query($con,"use movierental");
             
             if(isset($_POST['email_id']))
         {
-            $sql="Select firstname,lastname,custid,gender from customer where emailid='$email' and password=MD5('$passwrd')";
-            $result = mysql_query($sql);
-            if (mysql_numrows($result) > 0)
+            // query to check if the given email-id and password combination is correct 
+            $sql="Select firstname,lastname,custid,gender,status from customer where emailid='$email' and password=MD5('$passwrd')";
+            $result = mysqli_query($con,$sql);
+            
+            // If there are any results, session vaiables are set, if not error message is displayed
+            if (mysqli_num_rows($result) > 0)
             {
-                $row = mysql_fetch_assoc($result);
+                $row = mysqli_fetch_assoc($result);
+                
                 $_SESSION["firstname"] = $row['firstname'];
                 $_SESSION["lastname"] = $row['lastname'];
                 $_SESSION["custid"] = $row['custid'];
                 $_SESSION["gend"] = $row['gender'];
-                header("Location: home.php");
+                $admin = $row['status'];
+                //Checks Whether the user is Administrator or Normal Customer, then redirects to that page
+                if ($admin == "inactive")
+                {
+                    header("Location: admin_home.php");
+                }
+                else
+                {
+                    header("Location: home.php");
+                }
+
+                // After successfull login and if the status is Active, it will redirect to Customer home page
+               
              // output data of each row
                 //while($row = mysql_fetch_assoc($result)) {
                 //    echo $row['firstname'];
                   //   }
                 }
             else {
+                 
             $status = 'Login not successful ! Please check your email id or password !!' ;
                 }
                 }
